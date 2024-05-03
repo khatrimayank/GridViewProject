@@ -1,0 +1,56 @@
+ CREATE TABLE Employees (
+    Id  int IDENTITY(1,1) PRIMARY KEY,
+	FirstName nvarchar(50) NOT NULL,
+	LastName nvarchar(50) NOT NULL,
+	Age int ,
+	Salary int
+)
+
+
+SELECT TOP 100 * from Employees ;
+
+delete from Employees where id=1;
+
+CREATE PROCEDURE spInsert (
+  @fname nvarchar(50) ,
+  @lname nvarchar(50),
+  @age int,
+  @salary int
+)
+AS
+BEGIN
+Insert into Employees Values (@fname,@lname,@age,@salary)
+END
+
+
+Create Procedure spGetData
+AS
+BEGIN
+select * from Employees;
+END
+
+Create Procedure spDeleteData
+   @id int 
+AS
+BEGIN
+delete from Employees where id=@id
+END
+
+
+Create Procedure spUpdateData (
+  @id int,
+  @fname nvarchar(50),
+  @lname nvarchar(50),
+  @age int,
+  @salary int
+  )
+AS
+BEGIN
+Update Employees SET
+  FirstName = @fname,
+  LastName = @lname,
+  Age = @age,
+  Salary = @salary
+Where id = @id
+END
+
